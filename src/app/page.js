@@ -1,6 +1,6 @@
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Calculator from './components/Calculator';
+import Calculator from './components/CalculatorPro';
 
 export default function Home() {
 	return (
