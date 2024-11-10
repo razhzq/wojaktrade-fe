@@ -1,11 +1,12 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Header = () => {
 	return (
 		<div className="flex items-center justify-between p-4 bg-black">
 			{/* LEFT Section: Logo */}
 			<div className="flex-1 flex justify-center sm:justify-start">
-				<button className="px-4 py-2 font-poppins text-xl font-black text-white rounded">Tradely</button>
+				<Image src={'/assets/logo.png'} width={100} height={100} alt="logo" />
 			</div>
 
 			{/* RIGHT Section: Buttons - Hidden on Small Screens */}
@@ -19,6 +20,7 @@ const Header = () => {
 			</div>
 		</div>
 	);
+	a;
 };
 
 export default Header;

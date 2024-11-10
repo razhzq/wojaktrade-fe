@@ -1,7 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { IoInformationCircleOutline } from 'react-icons/io5';
+import { IoInformationCircleOutline, IoFilter, IoEyeOutline } from 'react-icons/io5';
+import RangeSlider from './RangeSlider';
 
 const Calculator = () => {
 	// Hard Code
@@ -97,12 +98,18 @@ const Calculator = () => {
 			<div className="w-full font-poppins flex flex-row justify-between max-w-md gap-4 items-center">
 				<div className="w-full font-semibold text-sm">
 					<div className="flex flex-row w-full justify-between">
-						<p>Fee</p>
+						<div className="flex items-center gap-1">
+							<p>Fee</p>
+							<IoInformationCircleOutline color="white" />
+						</div>
 						<p>$1.81</p>
 					</div>
 					<div className="flex flex-row w-full justify-between">
-						<p>Total</p>
-						<p>$1.90</p>
+						<div className="flex items-center gap-1">
+							<p>Total</p>
+							<IoInformationCircleOutline color="white" />
+						</div>
+						<p className="text-yellow-300">$1.90</p>
 					</div>
 				</div>
 				<button className="p-2 text-black font-semibold bg-limeGreen rounded-lg hover:bg-lime-300 whitespace-nowrap">
@@ -153,9 +160,26 @@ const Calculator = () => {
 		);
 	};
 
+	const renderWatchInfo = () => {
+		return (
+			<div className="flex flex-row justify-end items-center gap-4 w-full max-w-md font-poppins font-semibold">
+				<div className="flex justify-center items-center gap-1 cursor-pointer">
+					<IoEyeOutline />
+					<p>{'ISC'}</p>
+				</div>
+				<div className="flex justify-center items-center gap-1 cursor-pointer">
+					<IoFilter />
+					<p>{'0.8%'}</p>
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		<div className="w-screen justify-center items-center md:w-4/5 flex flex-col gap-4">
+			{renderWatchInfo()}
 			{renderCardSender()}
+			<RangeSlider />
 			{renderCardReceiver(true)}
 			{renderPriceSummary()}
 			{loanSummary()}
