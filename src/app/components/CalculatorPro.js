@@ -70,7 +70,7 @@ const Calculator = () => {
 						<IoInformationCircleOutline color="white" />
 					</div>
 					<div className="flex text-xs font-poppins font-semibold gap-1">
-						<p>{'AVAIALBALE LIQUIDITY: '}</p>
+						<p>{'AVAILABLE LIQUIDITY: '}</p>
 						<p className="text-white">{'251.9313 SOL'}</p>
 					</div>
 				</div>
