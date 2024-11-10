@@ -16,6 +16,8 @@ module.exports = {
 				customGray: '#16181c', // Custom color
 				purpleMain: '#5950b9',
 				limeGreen: '#63ea71',
+				searchBg: '#1b1b1b',
+				modalBg: '#131313',
 			},
 		},
 	},

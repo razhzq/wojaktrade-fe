@@ -3,28 +3,43 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { IoInformationCircleOutline, IoFilter, IoEyeOutline } from 'react-icons/io5';
 import RangeSlider from './RangeSlider';
+import CoinModal from './CoinModal';
+import { cryptoData } from '../utils/constants';
 
 const Calculator = () => {
-	// Hard Code
-	const senderCoin = {
-		label: 'SOL',
-		name: 'SOLANA',
-		value: 'sol',
-		image: '/assets/solana.png',
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [senderCoin, setSenderCoin] = useState([]);
+	const [receiverCoin, setReceiverCoin] = useState([]);
+	const [modalOpenBy, setModalOpenBy] = useState('sender');
+
+	useEffect(() => {
+		setSenderCoin(cryptoData[0]);
+		setReceiverCoin(cryptoData[2]);
+	}, []);
+
+	// Function to open the modal
+	const openModal = (sender) => {
+		setModalOpenBy(sender ? 'sender' : 'receiver');
+		setIsModalOpen(true);
 	};
 
-	// Hard Code
-	const receiverCoin = {
-		label: 'JUP',
-		name: 'JUPYTER',
-		value: 'jup',
-		image: '/assets/jup.png',
+	// Function to close the modal
+	const closeModal = () => {
+		setIsModalOpen(false);
 	};
 
-	const renderCoinInfo = (coin) => {
+	const handleSelectCoin = (coin) => {
+		modalOpenBy === 'sender' ? setSenderCoin(coin) : setReceiverCoin(coin);
+		closeModal();
+	};
+
+	const renderCoinInfo = (coin, sender = false) => {
 		return (
-			<button className="flex justify-center items-center bg-gray-800 p-1 rounded-md gap-2">
-				<Image src={coin?.image} className="rounded-2xl" width={30} height={30} alt={coin.name} />
+			<button
+				onClick={() => openModal(sender)}
+				className="flex justify-center items-center bg-gray-800 hover:bg-gray-600 p-1 rounded-md gap-2"
+			>
+				<img src={coin?.image} className="rounded-2xl" width={30} height={30} alt={coin.name} />
 				<p className="text-white font-poppins font-semibold">{coin?.label}</p>
 			</button>
 		);
@@ -42,7 +57,7 @@ const Calculator = () => {
 					<p></p>
 				</div>
 				<div className="flex w-full justify-between text-limeGreen">
-					{renderCoinInfo(senderCoin)}
+					{renderCoinInfo(senderCoin, true)}
 					<input
 						type="number"
 						min="0"
@@ -71,7 +86,7 @@ const Calculator = () => {
 					</div>
 					<div className="flex text-xs font-poppins font-semibold gap-1">
 						<p>{'AVAILABLE LIQUIDITY: '}</p>
-						<p className="text-white">{'251.9313 SOL'}</p>
+						<p className="text-white">{`251.9313 ${senderCoin?.label || 'USD'}`}</p>
 					</div>
 				</div>
 				<div className="flex w-full justify-between text-limeGreen">
@@ -87,7 +102,9 @@ const Calculator = () => {
 				</div>
 				<div className="flex w-full justify-between text-limeGreen">
 					<p></p>
-					<p className="font-poppins text-xs font-medium text-gray-400">1 SOL = 184.68686 JUP</p>
+					<p className="font-poppins text-xs font-medium text-gray-400">{`1 ${senderCoin?.label || 'USD'} = 184.68686 ${
+						receiverCoin?.label || 'USD'
+					}`}</p>
 				</div>
 			</div>
 		);
@@ -165,7 +182,7 @@ const Calculator = () => {
 			<div className="flex flex-row justify-end items-center gap-4 w-full max-w-md font-poppins font-semibold">
 				<div className="flex justify-center items-center gap-1 cursor-pointer">
 					<IoEyeOutline />
-					<p>{'ISC'}</p>
+					<p>{senderCoin?.label || 'USD'}</p>
 				</div>
 				<div className="flex justify-center items-center gap-1 cursor-pointer">
 					<IoFilter />
@@ -183,6 +200,7 @@ const Calculator = () => {
 			{renderCardReceiver(true)}
 			{renderPriceSummary()}
 			{loanSummary()}
+			<CoinModal isOpen={isModalOpen} closeModal={closeModal} handleSelectCoin={handleSelectCoin} />
 		</div>
 	);
 };
