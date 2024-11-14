@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Link } from 'react-router-dom'
 const SideTab = () => {
 	// State to track the active tab, default is "Home"
 	const [activeTab, setActiveTab] = useState('Home');
