@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-
+import { Link } from 'react-router-dom'
 const SideTab = () => {
 	// State to track the active tab, default is "Home"
 	const [activeTab, setActiveTab] = useState('Home');
@@ -41,7 +41,7 @@ const SideTab = () => {
 					className={`flex items-center gap-4 cursor-pointer p-2 hover:bg-purpleMain rounded-md mb-4 ${
 						activeTab === 'Farm' ? 'opacity-100' : 'opacity-70'
 					}`}
-					onClick={() => handleTabClick('Farm')}
+					onClick={() => window.location.href("https://ethctrx.gitbook.io/ethereum-centre-exchange")}
 				>
 					<img src="./assets/icons/farm.svg" alt="Farm Icon" className="w-7 h-7 filter invert" />
 					<p>Farm</p>
@@ -56,6 +56,20 @@ const SideTab = () => {
 				>
 					<img src="./assets/icons/candles.svg" alt="Trade Icon" className="w-7 h-7 filter invert" />
 					<p>Trade</p>
+				</div>
+				{/*Documentation Tab */}
+				<div
+					className={`flex items-center gap-4 cursor-pointer p-2 hover:bg-purpleMain rounded-md ${
+						activeTab === 'Documentation' ? 'opacity-100' : 'opacity-70'
+					}`}
+					onClick={() => handleTabClick('Documentation')}
+				>
+					<img src="./assets/icons/doc.svg" alt="Trade Icon" className="w-7 h-7 filter invert" />
+					<p>
+					<a href="https://ethctrx.gitbook.io/ethereum-centre-exchange" target="_blank" rel="noopener noreferrer">
+        Documentation
+      </a>
+					</p>
 				</div>
 			</div>
 		</div>
